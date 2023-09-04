@@ -16,14 +16,14 @@ void initial_draw(){
 
 void say_hello(){
     Message(ICON_INFORMATION,
-            "Tetris",
-            "This is Tetris by gottagofaster, 2020."
-            "\nSource code: github.com/gottagofaster236/pbtetris",
+            "title",
+            "It's Tetris time.  Get ready!",
             5000);
 }
 
 void init(){
-    font = OpenFont("DejaVu Sans", 25, false);
+    // set font type and size - for menu text
+    font = OpenFont("DejaVu Sans", 35, false);
     srand(time(0));
 }
 

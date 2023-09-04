@@ -11,6 +11,7 @@ struct Block {
 
 
 struct TetrisField {
+    // set playable area
     static const int WIDTH = 10, HEIGHT = 20;
     int colors[WIDTH][HEIGHT];  // -1 means no block. Else 0, 1, or 2.
     

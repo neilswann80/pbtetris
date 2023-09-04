@@ -246,7 +246,7 @@ void Game::redraw_block(const Block block, int color, int offset_x, int offset_y
 
 extern ifont* font;
 // distance for menu text from right side
-const int TEXT_X = -210;
+const int TEXT_X = -200;
 
 void Game::draw_background(){
     // drawing field border
@@ -261,9 +261,9 @@ void Game::draw_background(){
     SetFont(font, BLACK);
     DrawString(ScreenWidth() + TEXT_X, 100, "Score:");
     SetFont(font, BLACK);
-    DrawString(ScreenWidth() + TEXT_X, 200, "Highscore:");
+    DrawString(ScreenWidth() + TEXT_X, 180, "Highscore:");
     SetFont(font, BLACK);
-    DrawString(ScreenWidth() + TEXT_X, 300, "Next piece:");
+    DrawString(ScreenWidth() + TEXT_X, 260, "Next piece:");
     FullUpdate();
 }
 
@@ -285,22 +285,22 @@ void Game::redraw_score(){
         save_high_score(high_score);
     }
 
-    draw_score(score, 150);
-    draw_score(high_score, 250);
+    draw_score(score, 140);
+    draw_score(high_score, 220);
 }
 
-const int NEXT_TETROMINO_X = -240, NEXT_TETROMINO_Y = 360;
+const int NEXT_TETROMINO_X = -253, NEXT_TETROMINO_Y = 340;
 
 void Game::redraw_next_tetromino(){
     int x = ScreenWidth() + NEXT_TETROMINO_X, y = NEXT_TETROMINO_Y;
-    int width = -NEXT_TETROMINO_X, height = BLOCK_WIDTH * 2;
+    int width = -NEXT_TETROMINO_X + 200, height = BLOCK_WIDTH * 2;
     FillArea(x, y, width, height, WHITE);
 
     int draw_x;
     if(next_tetromino->rotations_count == 4)
-        draw_x = x + 100;
+        draw_x = x + 140;
     else
-        draw_x = x + 120;
+        draw_x = x + 140;
 
     const std::vector<Block> &blocks = next_tetromino->get_blocks();
     for(size_t i = 0; i < blocks.size(); i++){

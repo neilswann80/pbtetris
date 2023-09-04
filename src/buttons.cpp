@@ -48,7 +48,7 @@ void repeat_button_press_timer(){
 void on_key_down(int key){
     switch(key){
     case KEY_LEFT:
-    case KEY_PREV:
+    case KEY_BACK:
         on_button_press(BUTTON_LEFT);
         break;
     case KEY_RIGHT:
@@ -67,10 +67,10 @@ void on_key_down(int key){
 
 extern const ibitmap buttons_arrows, pause_button, new_game_button;
 
-const int ARROWS_Y = -150;
-const int MENU_Y = 10;
-const int PAUSE_BUTTON_X = -132;
-const int NEW_GAME_BUTTON_X = -66;
+const int ARROWS_Y = -240;
+const int MENU_Y = 0;
+const int PAUSE_BUTTON_X = -210;
+const int NEW_GAME_BUTTON_X = -105;
 
 void draw_bitmap(int x, int y, const ibitmap &bmp){
     DrawBitmap(x, y, &bmp);
@@ -86,7 +86,7 @@ void draw_buttons(){
 void on_pointer_down(int x, int y){
     if(y >= ScreenHeight() + ARROWS_Y){
         // clicked one of arrows
-        int button_number = x / 150;
+        int button_number = x / 268;
         switch (button_number) {
         case 0:
             on_key_down(KEY_LEFT);

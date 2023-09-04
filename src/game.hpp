@@ -1,7 +1,8 @@
 #pragma once
 #include "tetris.hpp"
 
-static const int BLOCK_WIDTH = 32, FIELD_X = 140, FIELD_Y = 4;
+// block width is each square that makes up a Tetris shape - bitmaps for each square in images.c
+static const int BLOCK_WIDTH = 58, FIELD_X = 140, FIELD_Y = 4;
 
 class Game {
 public:
