@@ -6,12 +6,14 @@
 # For example: cmake -DCMAKE_BUILD_TYPE=Debug -DTARGET_TYPE=Linux -DPLATFORM=FC
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 PROJECT (inkdemo)
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6.0)
+# will work with lower versions, but I set to the most recent at time of creation
+cmake_minimum_required(VERSION 3.25)
 
 SET (PLATFORM FC)
 
-SET (TOOLCHAIN_PATH "../../FRSCSDK")
-SET (TOOLCHAIN_PREFIX "arm-none-linux-gnueabi")
+# I cloned the SDK via git to a directory I created called PBSDK on my PC
+SET (TOOLCHAIN_PATH "../../PBSDK/SDK_6.3.0/SDK-B288/usr")
+SET (TOOLCHAIN_PREFIX "arm-obreey-linux-gnueabi")
 SET (TOOLCHAIN_INSTALL "sysroot/usr")
 
 ADD_DEFINITIONS(-DPLATFORM_FC)
@@ -65,6 +67,7 @@ SET (SRC_LIST
         ${CMAKE_SOURCE_DIR}/src/debug.hpp
         ${CMAKE_SOURCE_DIR}/src/debug.cpp)
 
+# output executable is "inkdemo" - rename to with a .app ext if not using the "copy to pocketbook" section below
 ADD_EXECUTABLE (inkdemo
 		${SRC_LIST}
 		${CMAKE_SOURCE_DIR}/cimages/images.c) 
@@ -73,11 +76,13 @@ ADD_EXECUTABLE (inkdemo
 INCLUDE_DIRECTORIES(${TARGET_INCLUDE})
 TARGET_LINK_LIBRARIES (inkdemo ${TARGET_LIB})
 
-# copying to pocketbook after build (change path if needed)
-SET (targetfile "/media/gottagofaster/PB625")
+# copying to pocketbook after build (change path if needed - or delete?)
+# targetfile is the path to the pocketbook over wifi
+SET (targetfile "/run/user/1000/gvfs/ftp:host=10.42.0.165/mnt/ext1/applications")
 add_custom_command(TARGET inkdemo POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:inkdemo> ${targetfile}/applications/pbtetris.app >/dev/null || :
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:inkdemo> ${targetfile}/pbtetris_test.app >/dev/null || :
 )
+# end of copy to pocketbook section
 
 INSTALL (TARGETS inkdemo DESTINATION bin)
 
