@@ -67,7 +67,7 @@ SET (SRC_LIST
         ${CMAKE_SOURCE_DIR}/src/debug.hpp
         ${CMAKE_SOURCE_DIR}/src/debug.cpp)
 
-# output executable is "inkdemo" - rename to with a .app ext if not using the "copy to pocketbook" section below
+# output executable is "inkdemo" - rename the outputted executable with a .app ext if not using the "copy to pocketbook" section below
 ADD_EXECUTABLE (inkdemo
 		${SRC_LIST}
 		${CMAKE_SOURCE_DIR}/cimages/images.c) 
