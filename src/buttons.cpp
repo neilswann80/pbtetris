@@ -48,18 +48,19 @@ void repeat_button_press_timer(){
 void on_key_down(int key){
     switch(key){
     case KEY_LEFT:
-    case KEY_BACK:
+    case IV_KEY_HOME:
         on_button_press(BUTTON_LEFT);
         break;
     case KEY_RIGHT:
-    case KEY_NEXT:
+    case IV_KEY_MENU:
         on_button_press(BUTTON_RIGHT);
         break;
     case KEY_UP:
-    case KEY_MENU:
+    case IV_KEY_NEXT:
         on_button_press(BUTTON_UP);
         break;
-    case KEY_DOWN:
+    case KEY_DOWN:  
+    case IV_KEY_PREV:
         on_button_press(BUTTON_DOWN);
         break;
     }
@@ -92,13 +93,13 @@ void on_pointer_down(int x, int y){
             on_key_down(KEY_LEFT);
             break;
         case 1:
-            on_key_down(KEY_RIGHT);
+            on_key_down(KEY_DOWN);
             break;
         case 2:
             on_key_down(KEY_UP);
             break;
         case 3:
-            on_key_down(KEY_DOWN);
+            on_key_down(KEY_RIGHT);
             break;
         }
     }
