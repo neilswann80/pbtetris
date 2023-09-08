@@ -3,7 +3,7 @@
 #include "inkview.h"
 
 enum Button {
-    BUTTON_LEFT, BUTTON_RIGHT, BUTTON_UP, BUTTON_DOWN, BUTTON_PAUSE, BUTTON_NEW_GAME
+    BUTTON_LEFT, BUTTON_RIGHT, BUTTON_UP, BUTTON_DOWN, BUTTON_PAUSE, BUTTON_NEW_GAME, BUTTON_OPT_MENU
 };
 
 const int BUTTON_REPEAT_TIME = 250;
@@ -32,6 +32,9 @@ void on_button_press(Button button){
         break;
     case BUTTON_NEW_GAME:
         game.new_game();
+        break;
+    case BUTTON_OPT_MENU:
+        CloseApp();
         break;
     }
 
@@ -66,12 +69,14 @@ void on_key_down(int key){
     }
 }
 
-extern const ibitmap buttons_arrows, pause_button, new_game_button;
+extern const ibitmap buttons_arrows, pause_button, new_game_button, opt_menu_button;
 
 const int ARROWS_Y = -240;
-const int MENU_Y = 0;
-const int PAUSE_BUTTON_X = -210;
+const int MENU_Y = 1000;
+const int MENU_Y2 = 4;
+const int PAUSE_BUTTON_X = -215;
 const int NEW_GAME_BUTTON_X = -105;
+const int OPT_MENU_BUTTON_X = -995;
 
 void draw_bitmap(int x, int y, const ibitmap &bmp){
     DrawBitmap(x, y, &bmp);
@@ -82,6 +87,7 @@ void draw_buttons(){
     draw_bitmap(0, ScreenHeight() + ARROWS_Y, buttons_arrows);
     draw_bitmap(ScreenWidth() + PAUSE_BUTTON_X, MENU_Y, pause_button);
     draw_bitmap(ScreenWidth() + NEW_GAME_BUTTON_X, MENU_Y, new_game_button);
+    draw_bitmap(ScreenWidth() + OPT_MENU_BUTTON_X, MENU_Y2, opt_menu_button);
 }
 
 void on_pointer_down(int x, int y){
@@ -110,6 +116,10 @@ void on_pointer_down(int x, int y){
     else if(ScreenWidth() + NEW_GAME_BUTTON_X <= x && x < ScreenWidth() + NEW_GAME_BUTTON_X + new_game_button.width
             && MENU_Y <= y && y < MENU_Y + new_game_button.height){
         game.new_game();
+    }
+    else if(ScreenWidth() + OPT_MENU_BUTTON_X <= x && x < ScreenWidth() + OPT_MENU_BUTTON_X + opt_menu_button.width
+            && MENU_Y2 <= y && y < MENU_Y2 + opt_menu_button.height){
+        CloseApp();
     }
 }
 

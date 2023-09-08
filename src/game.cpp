@@ -11,6 +11,7 @@ void Game::new_game(){
     score = 0;
     high_score = load_high_score();
     redraw_score();
+    FullUpdate();
     game_over = false;
     paused = true;
 
@@ -19,20 +20,12 @@ void Game::new_game(){
     delete next_tetromino;
     next_tetromino = create_random_tetromino();
 
-    bool first_time_play = true;
-    for(int i = 0; i < TetrisField::WIDTH; i++){
-        for(int j = 0; j < TetrisField::HEIGHT; j++){
-            if(draw_state.colors[i][j] != -1){
-                first_time_play = false;
-                break;
-            }
-        }
-    }
+
     field.clear();
     toggle_pause();
 
-    if(!first_time_play)
-        FullUpdate();
+    //if(!first_time_play)
+        //FullUpdate();
 }
 
 void Game::toggle_pause(){
@@ -132,6 +125,7 @@ void Game::check_for_line_clear(){
     }
 }
 
+// game speed
 const int FRAME_DELAY = 250;
 
 void Game::game_step_timer(){
@@ -259,12 +253,12 @@ void Game::draw_background(){
     DrawRect(x + 2, y + 2, width - 4, height - 4, BLACK);
     // drawing "Score:"
     SetFont(font, BLACK);
-    DrawString(ScreenWidth() + TEXT_X, 100, "Score:");
+    DrawString(ScreenWidth() + TEXT_X, 0, "Highscore:");
     SetFont(font, BLACK);
-    DrawString(ScreenWidth() + TEXT_X, 200, "Highscore:");
+    DrawString(ScreenWidth() + TEXT_X, 140, "Score:");
     SetFont(font, BLACK);
-    DrawString(ScreenWidth() + TEXT_X, 300, "Next piece:");
-    FullUpdate();
+    DrawString(ScreenWidth() + TEXT_X, 450, "Next piece:");
+    //FullUpdate();
 }
 
 void draw_score(int score, int y){
@@ -285,11 +279,11 @@ void Game::redraw_score(){
         save_high_score(high_score);
     }
 
-    draw_score(score, 150);
-    draw_score(high_score, 250);
+    draw_score(high_score, 50);
+    draw_score(score, 190);
 }
 
-const int NEXT_TETROMINO_X = -240, NEXT_TETROMINO_Y = 360;
+const int NEXT_TETROMINO_X = -240, NEXT_TETROMINO_Y = 530;
 
 void Game::redraw_next_tetromino(){
     int x = ScreenWidth() + NEXT_TETROMINO_X, y = NEXT_TETROMINO_Y;
@@ -298,9 +292,9 @@ void Game::redraw_next_tetromino(){
 
     int draw_x;
     if(next_tetromino->rotations_count == 4)
-        draw_x = x + 100;
+        draw_x = x + 95;
     else
-        draw_x = x + 120;
+        draw_x = x + 123;
 
     const std::vector<Block> &blocks = next_tetromino->get_blocks();
     for(size_t i = 0; i < blocks.size(); i++){

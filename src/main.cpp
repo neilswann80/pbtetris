@@ -1,24 +1,19 @@
-#include "inkview.h"
 #include "game.hpp"
 #include "buttons.hpp"
+#include "inkview.h"
 
 ifont *font;
 bool background_pause = false;  // when app goes to background, it pauses
 
-void say_hello();
-
-void initial_draw(){
-    game.draw_background();
-    draw_buttons();
-    say_hello();
-    game.new_game();
+void say_hello(){
+    Message(ICON_INFORMATION, "title", "It's Tetris time.  Get ready!", 5000);
 }
 
-void say_hello(){
-    Message(ICON_INFORMATION,
-            "title",
-            "It's Tetris time.  Get ready!",
-            5000);
+void initial_draw(){
+    say_hello();
+    game.draw_background();
+    draw_buttons();
+    game.new_game();
 }
 
 void init(){
