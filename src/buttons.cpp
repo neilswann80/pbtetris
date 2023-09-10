@@ -3,7 +3,7 @@
 #include "inkview.h"
 
 enum Button {
-    BUTTON_LEFT, BUTTON_RIGHT, BUTTON_UP, BUTTON_DOWN, BUTTON_PAUSE, BUTTON_NEW_GAME, BUTTON_OPT_MENU
+    BUTTON_LEFT, BUTTON_RIGHT, BUTTON_UP, BUTTON_DOWN, BUTTON_PAUSE, BUTTON_NEW_GAME, BUTTON_OPT_MENU, BUTTON_DROP
 };
 
 const int BUTTON_REPEAT_TIME = 250;
@@ -25,7 +25,7 @@ void on_button_press(Button button){
         game.rotate_tetromino(1);
         break;
     case BUTTON_DOWN:
-        game.put_tetromino_down();
+        game.rotate_tetromino(-1);
         break;
     case BUTTON_PAUSE:
         game.toggle_pause();
@@ -35,6 +35,9 @@ void on_button_press(Button button){
         break;
     case BUTTON_OPT_MENU:
         CloseApp();
+        break;
+    case BUTTON_DROP:
+        game.put_tetromino_down();
         break;
     }
 
@@ -69,14 +72,17 @@ void on_key_down(int key){
     }
 }
 
-extern const ibitmap buttons_arrows, pause_button, new_game_button, opt_menu_button;
+extern const ibitmap buttons_arrows, pause_button, new_game_button, opt_menu_button, drop_button;
 
-const int ARROWS_Y = -240;
-const int MENU_Y = 1000;
-const int MENU_Y2 = 4;
-const int PAUSE_BUTTON_X = -215;
-const int NEW_GAME_BUTTON_X = -105;
-const int OPT_MENU_BUTTON_X = -995;
+const int ARROWS_Y = -134;
+// pause and newgame
+const int MENU_Y = 1207;
+// exit/menu
+const int MENU_Y2 = 30;
+const int PAUSE_BUTTON_X = -1050; // -215
+const int NEW_GAME_BUTTON_X = -940; // -105
+const int OPT_MENU_BUTTON_X = -1040; // -995
+const int DROP_BUTTON_X = -215;  //-1050
 
 void draw_bitmap(int x, int y, const ibitmap &bmp){
     DrawBitmap(x, y, &bmp);
@@ -88,6 +94,7 @@ void draw_buttons(){
     draw_bitmap(ScreenWidth() + PAUSE_BUTTON_X, MENU_Y, pause_button);
     draw_bitmap(ScreenWidth() + NEW_GAME_BUTTON_X, MENU_Y, new_game_button);
     draw_bitmap(ScreenWidth() + OPT_MENU_BUTTON_X, MENU_Y2, opt_menu_button);
+    draw_bitmap(ScreenWidth() + DROP_BUTTON_X, MENU_Y, drop_button);
 }
 
 void on_pointer_down(int x, int y){
@@ -120,6 +127,10 @@ void on_pointer_down(int x, int y){
     else if(ScreenWidth() + OPT_MENU_BUTTON_X <= x && x < ScreenWidth() + OPT_MENU_BUTTON_X + opt_menu_button.width
             && MENU_Y2 <= y && y < MENU_Y2 + opt_menu_button.height){
         CloseApp();
+    }
+    else if(ScreenWidth() + DROP_BUTTON_X <= x && x < ScreenWidth() + DROP_BUTTON_X + drop_button.width
+            && MENU_Y <= y && y < MENU_Y + drop_button.height){
+        game.put_tetromino_down();
     }
 }
 

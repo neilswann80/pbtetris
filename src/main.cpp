@@ -10,10 +10,13 @@ void say_hello(){
 }
 
 void initial_draw(){
+    SetPanelType(0);
+    SetOrientation(0);
     say_hello();
     game.draw_background();
     draw_buttons();
     game.new_game();
+    
 }
 
 void init(){

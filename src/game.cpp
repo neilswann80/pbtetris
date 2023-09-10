@@ -253,11 +253,11 @@ void Game::draw_background(){
     DrawRect(x + 2, y + 2, width - 4, height - 4, BLACK);
     // drawing "Score:"
     SetFont(font, BLACK);
-    DrawString(ScreenWidth() + TEXT_X, 0, "Highscore:");
+    DrawString(ScreenWidth() + TEXT_X, 30, "Highscore:");
     SetFont(font, BLACK);
-    DrawString(ScreenWidth() + TEXT_X, 140, "Score:");
+    DrawString(ScreenWidth() + TEXT_X, 170, "Score:");
     SetFont(font, BLACK);
-    DrawString(ScreenWidth() + TEXT_X, 450, "Next piece:");
+    DrawString(ScreenWidth() + TEXT_X, 540, "Next piece:");
     //FullUpdate();
 }
 
@@ -279,11 +279,11 @@ void Game::redraw_score(){
         save_high_score(high_score);
     }
 
-    draw_score(high_score, 50);
-    draw_score(score, 190);
+    draw_score(high_score, 80);
+    draw_score(score, 220);
 }
 
-const int NEXT_TETROMINO_X = -240, NEXT_TETROMINO_Y = 530;
+const int NEXT_TETROMINO_X = -240, NEXT_TETROMINO_Y = 600;
 
 void Game::redraw_next_tetromino(){
     int x = ScreenWidth() + NEXT_TETROMINO_X, y = NEXT_TETROMINO_Y;
