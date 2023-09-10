@@ -122,6 +122,7 @@ void Game::check_for_line_clear(){
         redraw_score();
         redraw();
         FullUpdate();
+        sleep(1);
     }
 }
 
