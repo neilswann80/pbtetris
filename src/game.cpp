@@ -20,12 +20,10 @@ void Game::new_game(){
     delete next_tetromino;
     next_tetromino = create_random_tetromino();
 
-
     field.clear();
     toggle_pause();
+    sleep(1);
 
-    //if(!first_time_play)
-        //FullUpdate();
 }
 
 void Game::toggle_pause(){
