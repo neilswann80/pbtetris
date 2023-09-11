@@ -1,5 +1,5 @@
 # pbtetris
-PBTetris recompiled for the PocketBook PB632 - 1072x1448 resolution
+pbtetris recompiled for the PocketBook PB632 - 1072x1448 resolution
 
 | ![screenshot](https://github.com/neilswann80/pbtetris/blob/PB632/images/pbtetris_screenshot.jpg?raw=true) |
 |-|
